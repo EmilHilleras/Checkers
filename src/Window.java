@@ -10,7 +10,7 @@ public class Window extends JFrame {
         // Window content
         this.add(new Board());
 
-        //window visible
+        //Make window visible
         this.pack();
         this.setVisible(true);
 
