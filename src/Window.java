@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import myPackage.Piece;
 import java.awt.Color;
+import myPackage.PieceType;
+
 
 public class Window extends JFrame {
 
@@ -29,12 +31,14 @@ public class Window extends JFrame {
                 squares[i][j] = square;
 
                 if ((i + j) % 2 != 0 && i < 3) {
-                    Piece piece = new Piece(Piece.PieceType.REGULAR, Piece.BLACK);
+                    Piece piece = new Piece(PieceType.REGULAR, Piece.BLACK);
                     squares[i][j].setPiece(true, piece);
+                    System.out.println("Added black piece at row " + i + ", column " + j);
                 }
                 if ((i + j) % 2 != 0 && i > 4) {
-                    Piece piece = new Piece(Piece.PieceType.REGULAR, Piece.WHITE);
+                    Piece piece = new Piece(PieceType.REGULAR, Piece.RED);
                     squares[i][j].setPiece(true, piece);
+                    System.out.println("Added red piece at row " + i + ", column " + j);
                 }
 
 

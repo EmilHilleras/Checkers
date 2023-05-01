@@ -1,6 +1,5 @@
 package myPackage;
 import java.awt.*;
-import myPackage.Piece;
 
 
 public class King extends Piece{
