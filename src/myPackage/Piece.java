@@ -1,6 +1,7 @@
 package myPackage;
 import java.awt.*;
-public class Piece {
+
+public class Piece extends Point{
 
     private final PieceType type;
     private boolean isKing;
@@ -32,6 +33,8 @@ public class Piece {
 
     }
 
+
+
     public PieceType getType() {
         return type;
     }
@@ -44,13 +47,21 @@ public class Piece {
         isKing = true;
     }
 
+    public void setRegular(){
+        boolean isRegular = true;
+    }
+
     public boolean isKing() {
         return isKing;
     }
 
+    public boolean isRegular() {return isRegular();}
+
     public static Color getColor() {
         return color;
     }
+
+
 
 
 }

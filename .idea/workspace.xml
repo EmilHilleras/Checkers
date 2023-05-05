@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bcb3731-3b3b-4ba3-8fb2-9d1101a06f28" name="Changes" comment="2">
+      <change afterPath="$PROJECT_DIR$/src/PieceMove.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/myPackage/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myPackage/King.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myPackage/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myPackage/Piece.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +49,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1680508572532</updated>
-      <workItem from="1680508574001" duration="83046000" />
+      <workItem from="1680508574001" duration="122721000" />
     </task>
     <task id="LOCAL−00001" summary="Första uppdateringen">
       <created>1681904389269</created>
@@ -87,7 +87,13 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1682946072875</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="2">
+      <created>1682981579685</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1682981579685</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

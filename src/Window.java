@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import myPackage.Piece;
 import java.awt.Color;
+import java.util.ArrayList;
 import myPackage.PieceType;
 
 
@@ -11,6 +12,10 @@ public class Window extends JFrame {
     private final int boardSize = 600;
     private final Color c1 = new Color(245, 245, 220);
     private final Color c2 = new Color(0, 100, 0);
+    private static Piece[][] pieces = new Piece[8][8];
+    private static Square[][] squares = new Square[8][8];
+    private static ArrayList<Point> piecePos;
+
 
     //Constructor
     public Window() {
@@ -18,27 +23,30 @@ public class Window extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(boardSize, boardSize));
         JPanel boardPanel = new JPanel(new GridLayout(8, 8));
-        Square[][] squares = new Square[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        piecePos = new ArrayList<>();
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
                 Square square = new Square();
-                if ((i + j) % 2 == 0) {
+                if ((row + col) % 2 == 0) {
                     square.setBackground(c1);
                 } else {
                     square.setBackground(c2);
                 }
                 boardPanel.add(square);
-                squares[i][j] = square;
+                squares[row][col] = square;
 
-                if ((i + j) % 2 != 0 && i < 3) {
+                if ((row + col) % 2 != 0 && row < 3) {
                     Piece piece = new Piece(PieceType.REGULAR, Piece.BLACK);
-                    squares[i][j].setPiece(true, piece);
-                    System.out.println("Added black piece at row " + i + ", column " + j);
+                    squares[row][col].setPiece(true, piece);
+                    piecePos.add(new Point(row, col));
+                    System.out.println("Added black piece at row " + row + ", column " + col);
                 }
-                if ((i + j) % 2 != 0 && i > 4) {
+                if ((row + col) % 2 != 0 && row > 4) {
                     Piece piece = new Piece(PieceType.REGULAR, Piece.RED);
-                    squares[i][j].setPiece(true, piece);
-                    System.out.println("Added red piece at row " + i + ", column " + j);
+                    squares[row][col].setPiece(true, piece);
+                    piecePos.add(new Point(row, col));
+                    System.out.println("Added red piece at row " + row + ", column " + col);
                 }
 
 
@@ -52,6 +60,24 @@ public class Window extends JFrame {
 
     //Method
 
+    public static ArrayList<Point> getPieces() {
+        return piecePos;
+    }
+
+
+
     //GetSet
+
+
+    public static Square[][] getSquares() {
+        return squares;
+    }
+
+    public Point getPos(){
+
+        return new Point(0, 0);
+    }
+
+
 
 }

@@ -18,6 +18,9 @@ public class Square extends JPanel {
     private BufferedImage redPieceImage;
     private BufferedImage blackKingImage;
     private BufferedImage redKingImage;
+    private final int x = 10;
+    private final int y = 10;
+
 
 
     //Constructor
@@ -45,13 +48,13 @@ public class Square extends JPanel {
         if (piece !=null) {
             PieceImageType imageType = piece.getImageType();
             if (imageType == PieceImageType.RED_PIECE) {
-                g.drawImage(redPieceImage, 10, 10, SIZE - 20, SIZE - 20, null);
+                g.drawImage(redPieceImage, x, y, SIZE - 20, SIZE - 20, null);
             } else if (imageType == PieceImageType.BLACK_PIECE) {
-                g.drawImage(blackPieceImage, 10, 10, SIZE - 20, SIZE - 20, null);
+                g.drawImage(blackPieceImage, x, y, SIZE - 20, SIZE - 20, null);
             } else if (imageType == PieceImageType.RED_KING) {
-                g.drawImage(redKingImage, 10, 10, SIZE - 20, SIZE - 20, null);
+                g.drawImage(redKingImage, x, y, SIZE - 20, SIZE - 20, null);
             } else if (imageType == PieceImageType.BLACK_KING) {
-                g.drawImage(blackKingImage, 10, 10, SIZE - 20, SIZE - 20, null);
+                g.drawImage(blackKingImage, x, y, SIZE - 20, SIZE - 20, null);
             }
         }
 
@@ -60,8 +63,16 @@ public class Square extends JPanel {
         return ImageIO.read(getClass().getResource("/images/" + filename));
     }
 
-    public boolean hasPiece(Piece piece) {
-        return this.piece == piece;
+    public boolean contains(Point point) {
+        return this.x == point.x && this.y == point.y;
+    }
+
+    public Point getPos() {
+        return new Point(x*SIZE, y*SIZE);
+    }
+
+    public boolean hasPiece(Boolean hasPiece) {
+        return hasPiece;
     }
 
     public void setPiece(boolean hasPiece, Piece piece) {
@@ -76,5 +87,25 @@ public class Square extends JPanel {
         piece = null;
         repaint();
     }
+
+    public Piece getPiece() {
+        return piece;
+    }
+
+    public int getRow(){
+
+        return y / SIZE;
+
+    }
+
+    public int getCol(){
+
+        return x / SIZE;
+    }
+
+
+    public void setPiece(Point selectedPiece) {
+    }
+
 
 }
