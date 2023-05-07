@@ -1,4 +1,4 @@
-package myPackage;
+package Piece;
 import java.awt.*;
 import javax.swing.*;
 import java.util.HashMap;

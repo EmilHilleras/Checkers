@@ -1,4 +1,4 @@
-package myPackage;
+package Piece;
 
 public enum PieceType {
     REGULAR,

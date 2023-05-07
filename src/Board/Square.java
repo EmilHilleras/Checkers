@@ -1,5 +1,7 @@
-import myPackage.Piece;
-import myPackage.PieceImageType;
+package Board;
+import Piece.Piece;
+import Piece.PieceImageType;
+import Piece.PieceType;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
@@ -12,19 +14,22 @@ public class Square extends JPanel {
 
     //Attribute
     private boolean hasPiece = false;
-    private final int SIZE = 75;
+    private final static int SIZE = 75;
     private Piece piece;
-    private BufferedImage blackPieceImage;
-    private BufferedImage redPieceImage;
-    private BufferedImage blackKingImage;
-    private BufferedImage redKingImage;
-    private final int x = 10;
-    private final int y = 10;
+    private static BufferedImage blackPieceImage;
+    private static BufferedImage redPieceImage;
+    private static BufferedImage blackKingImage;
+    private static BufferedImage redKingImage;
+    private PieceType pieceType;
+    private final static int x = 10;
+    private final static int y = 10;
 
+    private int row;
+    private int col;
 
 
     //Constructor
-    public Square() {
+    public Square(int row, int col) {
 
         try {
             blackPieceImage = loadImage("black_piece.png");
@@ -37,15 +42,20 @@ public class Square extends JPanel {
 
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setSize(new Dimension(SIZE, SIZE));
+        this.row = row;
+        this.col = col;
 
     }
 
+    //Method
 
+
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
 
-        if (piece !=null) {
+        if (piece != null) {
             PieceImageType imageType = piece.getImageType();
             if (imageType == PieceImageType.RED_PIECE) {
                 g.drawImage(redPieceImage, x, y, SIZE - 20, SIZE - 20, null);
@@ -59,6 +69,7 @@ public class Square extends JPanel {
         }
 
     }
+
     private BufferedImage loadImage(String filename) throws IOException {
         return ImageIO.read(getClass().getResource("/images/" + filename));
     }
@@ -67,22 +78,26 @@ public class Square extends JPanel {
         return this.x == point.x && this.y == point.y;
     }
 
-    public Point getPos() {
-        return new Point(x*SIZE, y*SIZE);
-    }
-
-    public boolean hasPiece(Boolean hasPiece) {
+    public boolean hasPiece() {
         return hasPiece;
     }
 
-    public void setPiece(boolean hasPiece, Piece piece) {
-        this.hasPiece = hasPiece;
+    public void setPiece(Piece piece) {
+        hasPiece = true;
         this.piece = piece;
+        this.pieceType = piece.getType();
         repaint();
 
     }
 
-    public void removePiece(){
+    public void movePieceTo(Square newSquare) {
+
+        newSquare.setPiece(this.piece);
+        this.removePiece();
+
+    }
+
+    public void removePiece() {
         hasPiece = false;
         piece = null;
         repaint();
@@ -92,19 +107,15 @@ public class Square extends JPanel {
         return piece;
     }
 
-    public int getRow(){
+    public int getRow() {
 
-        return y / SIZE;
+        return row;
 
     }
 
-    public int getCol(){
+    public int getCol() {
 
-        return x / SIZE;
-    }
-
-
-    public void setPiece(Point selectedPiece) {
+        return col;
     }
 
 

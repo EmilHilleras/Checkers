@@ -1,4 +1,4 @@
-package myPackage;
+package Piece;
 
 public enum PieceImageType {
     RED_PIECE,

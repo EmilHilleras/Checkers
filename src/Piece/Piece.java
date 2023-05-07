@@ -1,17 +1,18 @@
-package myPackage;
+package Piece;
 import java.awt.*;
 
-public class Piece extends Point{
+public class Piece{
 
     private final PieceType type;
     private boolean isKing;
-
+    private boolean isRed;
+    private boolean isRegular;
+    private Color color;
     private PieceImageType imageType;
 
     public static final Color BLACK = Color.BLACK;
-
     public static final Color RED = Color.RED;
-    private static Color color;
+
 
     public Piece(PieceType type, Color color) {
         this.type = type;
@@ -23,6 +24,7 @@ public class Piece extends Point{
             } else {
                 this.imageType = PieceImageType.RED_KING;
             }
+            this.isRed = true;
         } else {
             if (type == PieceType.REGULAR) {
                 this.imageType = PieceImageType.BLACK_PIECE;
@@ -32,8 +34,6 @@ public class Piece extends Point{
         }
 
     }
-
-
 
     public PieceType getType() {
         return type;
@@ -48,20 +48,25 @@ public class Piece extends Point{
     }
 
     public void setRegular(){
-        boolean isRegular = true;
+        isRegular = true;
     }
 
     public boolean isKing() {
         return isKing;
     }
 
-    public boolean isRegular() {return isRegular();}
+    public boolean isRegular() {return isRegular;}
 
-    public static Color getColor() {
-        return color;
+    public boolean isRed() {
+        return isRed;
     }
 
+    public boolean isBlack() {
+        return !isRed;
+    }
 
-
+    public Color getColor() {
+        return color;
+    }
 
 }
