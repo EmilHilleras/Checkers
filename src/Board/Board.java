@@ -4,6 +4,9 @@ import java.awt.*;
 import Piece.Piece;
 import java.awt.Color;
 import Piece.PieceType;
+import Piece.RegularPiece;
+import Piece.KingPiece;
+import Piece.PieceColor;
 
 
 public class Board extends JFrame {
@@ -34,11 +37,11 @@ public class Board extends JFrame {
                 }
 
                 if ((row + col) % 2 != 0 && row < 3) {
-                    board[row][col].setPiece(new Piece(PieceType.REGULAR, Piece.BLACK));
+                    board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.BLACK));
                     System.out.println("Added black piece at row " + row + ", column " + col);
                 }
                 if ((row + col) % 2 != 0 && row > 4) {
-                    board[row][col].setPiece(new Piece(PieceType.REGULAR, Piece.RED));
+                    board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.RED));
                     System.out.println("Added red piece at row " + row + ", column " + col);
                 }
 
@@ -51,6 +54,25 @@ public class Board extends JFrame {
     }
 
     //Method
+
+    public static Piece createPiece(PieceType type, PieceColor color) {
+        if (color == PieceColor.RED) {
+            if (type == PieceType.REGULAR) {
+                return new RegularPiece(PieceColor.RED);
+            } else if (type == PieceType.KING) {
+                return new KingPiece(PieceColor.RED);
+            }
+        } else if (color == PieceColor.BLACK) {
+            if (type == PieceType.REGULAR) {
+                return new RegularPiece(PieceColor.BLACK);
+            } else if (type == PieceType.KING) {
+                return new KingPiece(PieceColor.BLACK);
+            }
+        }
+        return null;
+    }
+
+
 
     //GetSet
 

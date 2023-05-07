@@ -1,31 +1,29 @@
 package Piece;
 import java.awt.*;
 
-public class Piece{
+public abstract class Piece{
 
     private final PieceType type;
+    private final PieceColor color;
     private boolean isKing;
     private boolean isRed;
     private boolean isRegular;
-    private Color color;
     private PieceImageType imageType;
 
-    public static final Color BLACK = Color.BLACK;
-    public static final Color RED = Color.RED;
 
 
-    public Piece(PieceType type, Color color) {
+    public Piece(PieceType type, PieceColor color) {
         this.type = type;
         this.color = color;
 
-        if (color == Piece.RED) {
+        if (color == PieceColor.RED) {
             if (type == PieceType.REGULAR) {
                 this.imageType = PieceImageType.RED_PIECE;
             } else {
                 this.imageType = PieceImageType.RED_KING;
             }
             this.isRed = true;
-        } else {
+        } else if (color == PieceColor.BLACK){
             if (type == PieceType.REGULAR) {
                 this.imageType = PieceImageType.BLACK_PIECE;
             } else {
@@ -34,6 +32,8 @@ public class Piece{
         }
 
     }
+
+    public abstract boolean isValidMove(int srcRow, int srcCol, int destRow, int destCol);
 
     public PieceType getType() {
         return type;
@@ -58,14 +58,17 @@ public class Piece{
     public boolean isRegular() {return isRegular;}
 
     public boolean isRed() {
+
         return isRed;
     }
 
     public boolean isBlack() {
+
         return !isRed;
     }
 
-    public Color getColor() {
+    public PieceColor getColor() {
+
         return color;
     }
 
