@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bcb3731-3b3b-4ba3-8fb2-9d1101a06f28" name="Changes" comment="uppdatering">
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameRules/VictoryConditions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/black_king.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/black_piece.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/red_king.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/red_piece.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece/KingPiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece/KingPiece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece/PieceImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece/PieceImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece/RegularPiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece/RegularPiece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Move/CanMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move/CanMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Move/PieceMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move/PieceMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +49,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1680508572532</updated>
-      <workItem from="1680508574001" duration="187405000" />
+      <workItem from="1680508574001" duration="194057000" />
     </task>
     <task id="LOCAL−00001" summary="Första uppdateringen">
       <created>1681904389269</created>
@@ -129,7 +117,13 @@
       <option name="presentableId" value="LOCAL−00011" />
       <updated>1683504748187</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL−00012" summary="uppdatering">
+      <created>1683532499935</created>
+      <option name="number" value="LOCAL−00012" />
+      <option name="presentableId" value="LOCAL−00012" />
+      <updated>1683532499935</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

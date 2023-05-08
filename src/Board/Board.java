@@ -45,7 +45,7 @@ public class Board extends JFrame {
                 boardPanel.add(getSquare(row, col));//Lägger till rutan i JPanel, vilket gör rutan synlig
                 board[row][col].addMouseListener(new PieceMove(this));//Lägger till en mouseListner för att hålla koll på klickar i detta fall
 
-                //If satser som placerar pjäser på spelplanen
+                //If satser som placerar pjäser på spelplanen om de är jämna och uppfyller de krav som ställs utifrån färg
                 if ((row + col) % 2 != 0 && row < 3) {
                     board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.BLACK)); //Skapar en vanlig svart pjäs
                     System.out.println("Added black piece at row " + row + ", column " + col); //Skriver ut att pjäsen har skapats
@@ -105,7 +105,8 @@ public class Board extends JFrame {
             for (int row = 0; row < 8; row++) {
                 for (int col = 0; col < 8; col++) {
                     Square destinationSquare = getSquare(row, col);
-                    if (CanMove.isValid(this, square, destinationSquare)) {
+                    CanMove canMove = new CanMove(this, square, destinationSquare );
+                    if (canMove.isValid()) {
                         validMoves.add(destinationSquare);
                     }
                 }

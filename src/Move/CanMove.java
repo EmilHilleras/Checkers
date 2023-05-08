@@ -7,10 +7,10 @@ import Piece.Piece;
 public class CanMove {
 
     //Instansvariabel
-    private static Board board; // variabel för brädet
-    private static Square sourceSquare; //Källruta
-    private static Square targetSquare; //Målruta
-    private static Piece piece; //variabel för pjäsen
+    private Board board; // variabel för brädet
+    private Square sourceSquare; //Källruta
+    private Square targetSquare; //Målruta
+    private Piece piece; //variabel för pjäsen
 
     //Konstruktor
 
@@ -26,7 +26,7 @@ public class CanMove {
 
 
     //Metod som ser om draget är giltigt
-    public static boolean isValid(Board board, Square sourceSquare, Square targetSquare) {
+    public boolean isValid() {
         //Kollar om källrutan innehåller en pjäs
         if (piece == null) {
             return false;
@@ -76,7 +76,7 @@ public class CanMove {
     //Metod som utför draget
     public void execute() {
         //Kollar om draget är giltigt
-        if (isValid(board, sourceSquare, targetSquare)) {
+        if (isValid()) {
 
             targetSquare.setPiece(piece); //Sätter pjäs i målrutan
             sourceSquare.removePiece(); //Tar bort pjäs från källrutan

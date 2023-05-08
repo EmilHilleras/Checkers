@@ -14,6 +14,7 @@ public class PieceMove extends MouseAdapter {
     private Board board; //Variabel för brädet
     private Piece selectedPiece; //Variabel för vald pjäs
     private Square selectedSquare; //Variabel för vald ruta
+    private Square selectedSquare2; //Variabel för andra vald ruta
 
     PlayerTurn playerTurn = new PlayerTurn(true); //Skapar en ny runda genom hänvisning till PlayerTurn klassen
 
@@ -26,7 +27,7 @@ public class PieceMove extends MouseAdapter {
     //Metod
 
 
-    //Metoden registrerar när någon clickar och anvnder det för att flytta pjäser
+    //Metoden registrerar när någon clickar och använder det för att flytta pjäser
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("Click");
@@ -56,22 +57,29 @@ public class PieceMove extends MouseAdapter {
 
                     highlightValidMoves(selectedSquare);
                 }
-            } else {
+            } else if (selectedPiece != null){
                 // Vid detta skede är en pjäs vald
-                CanMove move = new CanMove(board, selectedSquare, clickedSquare);//skapar ett objekt move som förlitar sig på CanMove
-                if (move.isValid(board, selectedSquare, clickedSquare)) {
-                    move.execute(); //Utfärdar drag om möjligt
+
+                if (e.getButton() == MouseEvent.BUTTON2) {
+
+                    Square clickedSquare2 = (Square) e.getSource();
+                    selectedSquare2 = clickedSquare2;
+
+                    CanMove move = new CanMove(board, selectedSquare, selectedSquare2);//skapar ett objekt move som förlitar sig på CanMove
+                    if (move.isValid()) {
+                        move.execute(); //Utfärdar drag om möjligt
 
 
-                    // Tar bort vald pjäs och ruta efter lyckat drag
-                    selectedPiece = null;
-                    selectedSquare = null;
+                        // Tar bort vald pjäs och ruta efter lyckat drag
+                        selectedPiece = null;
+                        selectedSquare = null;
 
-                    // Tar bort highlighting från alla rutor
-                    board.clearHighlights();
+                        // Tar bort highlighting från alla rutor
+                        board.clearHighlights();
 
-                    // Byter runda
-                    PlayerTurn.switchTurn();
+                        // Byter runda
+                        PlayerTurn.switchTurn();
+                    }
                 }
             }
         }
