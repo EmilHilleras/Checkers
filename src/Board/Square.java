@@ -12,25 +12,27 @@ import javax.imageio.ImageIO;
 public class Square extends JPanel {
 
 
-    //Attribute
-    private boolean hasPiece = false;
-    private final static int SIZE = 75;
-    private Piece piece;
-    private static BufferedImage blackPieceImage;
-    private static BufferedImage redPieceImage;
-    private static BufferedImage blackKingImage;
-    private static BufferedImage redKingImage;
-    private PieceType pieceType;
-    private final static int x = 10;
-    private final static int y = 10;
+    //Instansvariabler
+    private boolean hasPiece = false; // Attribut som används för att indikera om en ruta innehåller en pjäs
+    private final static int SIZE = 75; //Storlek på en enskild ruta
+    private Piece piece; //Pjäsen som en ruta kan innehålla
+    private static BufferedImage blackPieceImage; //Bilden för en svart pjäs
+    private static BufferedImage redPieceImage; //Bilden för en röd pjäs
+    private static BufferedImage blackKingImage; // Bilden för en svart kung
+    private static BufferedImage redKingImage; //Bilden för en röd kung
+    private PieceType pieceType; //Typen av pjäs rutan innehåller
+    private final static int x = 10; //X-Koordinat för rutans vänstra hörn
+    private final static int y = 10; //Y-Koordinat för rutans vänstra hörn
+    private boolean highlighted; //Indikerar om rutan är markerad
 
-    private int row;
-    private int col;
+    private int row; //Rad rutan tillhör
+    private int col; //Kolumn rutan tillhör
 
 
-    //Constructor
+    //Konstruktor
     public Square(int row, int col) {
 
+        //Laddar bilderna för pjäser
         try {
             blackPieceImage = loadImage("black_piece.png");
             redPieceImage = loadImage("red_piece.png");
@@ -40,21 +42,26 @@ public class Square extends JPanel {
             e.printStackTrace();
         }
 
+        //Rutans storlek och border
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setSize(new Dimension(SIZE, SIZE));
+
+        //Sätter tillhörande rad och kolumn för rutan
         this.row = row;
         this.col = col;
 
     }
 
-    //Method
+    //Metod
 
 
+    //Ritar rutans innehåll
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
 
+        //Ritar ut bilden för pjäsen om det finns någon
         if (piece != null) {
             PieceImageType imageType = piece.getImageType();
             if (imageType == PieceImageType.RED_PIECE) {
@@ -70,18 +77,21 @@ public class Square extends JPanel {
 
     }
 
+
+    //LoadImage används för att hantera mappstrukturen separat och endast behöva ange den en gång
     private BufferedImage loadImage(String filename) throws IOException {
         return ImageIO.read(getClass().getResource("/images/" + filename));
     }
 
-    public boolean contains(Point point) {
-        return this.x == point.x && this.y == point.y;
-    }
+
+
+    //Returnerar om rutan har en pjäs
 
     public boolean hasPiece() {
         return hasPiece;
     }
 
+    //Sätter en pjäs på en ruta
     public void setPiece(Piece piece) {
         hasPiece = true;
         this.piece = piece;
@@ -90,12 +100,7 @@ public class Square extends JPanel {
 
     }
 
-    public void movePieceTo(Square newSquare) {
-
-        newSquare.setPiece(this.piece);
-        this.removePiece();
-
-    }
+    //Tar bort en pjäs från en ruta
 
     public void removePiece() {
         hasPiece = false;
@@ -103,20 +108,44 @@ public class Square extends JPanel {
         repaint();
     }
 
+    //returnerar vilken pjäs som finns på rutan
     public Piece getPiece() {
         return piece;
     }
 
+    //returnerar vilken rad rutan ligger på
     public int getRow() {
 
         return row;
 
     }
 
+    //returnerar vilken column rutan ligger på
     public int getCol() {
 
         return col;
     }
 
+    //returnerar värdet av attributet highlighted
+    public static boolean isHighlighted(boolean highlighted) {
+
+        return highlighted;
+    }
+
+    //Sätter highlighted till true
+    public void highlight() {
+
+        highlighted = true;
+        this.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        repaint();
+    }
+
+    //Sätter highlighted till false
+    public void notHighlighted() {
+
+        highlighted = false;
+        this.setBorder(BorderFactory.createLineBorder(Color.black));
+        repaint();
+    }
 
 }

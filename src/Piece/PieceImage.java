@@ -8,10 +8,27 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class PieceImage implements Icon {
-    private static final int WIDTH = 75;
-    private static final int HEIGHT = 75;
 
+    //Instansvariabler
+    private static final int WIDTH = 75; //Bestämmer bredd
+    private static final int HEIGHT = 75; //Bestämmer höjd
+    private final PieceImageType type; //Typ av bild
+
+    //Konstruktor
+
+
+    // Använder PieceImage instans med given typ av pjäs
+    public PieceImage(PieceImageType type) {
+
+        this.type = type;
+    }
+    //Metod
+
+
+    //Använder HashMap för att lagra bilder för olika pjäser
     private static final HashMap<PieceImageType, Image> pieceImages = new HashMap<>();
+
+    //Laddar in bilderna i HashMapen
     static {
         pieceImages.put(PieceImageType.RED_PIECE, loadImage("red_piece.png"));
         pieceImages.put(PieceImageType.BLACK_PIECE, loadImage("black_piece.png"));
@@ -20,6 +37,7 @@ public class PieceImage implements Icon {
     }
 
 
+    //Metod för att ladda in bild och ge den rätt skala
     private static Image loadImage(String filename) {
         try {
 
@@ -37,24 +55,24 @@ public class PieceImage implements Icon {
     }
 
 
-    private final PieceImageType type;
 
-    public PieceImage(PieceImageType type) {
-
-        this.type = type;
-    }
-
+    //Metod som ritar ut ikon efter given position
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         Image pieceImage = pieceImages.get(type);
         g.drawImage(pieceImage, x, y, WIDTH, HEIGHT, null);
     }
 
+
+    //GetSet
+
+    //Returnerar bredden
     @Override
     public int getIconWidth() {
         return WIDTH;
     }
 
+    //Returnerar höjden
     @Override
     public int getIconHeight() {
         return HEIGHT;

@@ -4,7 +4,7 @@ import Board.Board;
 public class Main {
     public static void main(String[] args) {
 
-        //Creating new window
+        //Skapa nytt fönster
         SwingUtilities.invokeLater(Board::new);
 
     }
