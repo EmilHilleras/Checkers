@@ -11,11 +11,6 @@ import Piece.PieceColor;
 
 public class Board extends JFrame {
 
-    //Attribute
-    private final int boardSize = 600;
-    private final Color c1 = new Color(245, 245, 220);
-    private final Color c2 = new Color(0, 100, 0);
-
     Square[][] board = new Square[8][8];
 
 
@@ -23,6 +18,8 @@ public class Board extends JFrame {
     public Board() {
         this.setTitle("Checkers");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Attribute
+        int boardSize = 600;
         this.setPreferredSize(new Dimension(boardSize, boardSize));
         JPanel boardPanel = new JPanel(new GridLayout(8, 8));
 
@@ -31,18 +28,22 @@ public class Board extends JFrame {
 
                 board[row][col] = new Square(row,col);
                 if ((row + col) % 2 == 0) {
+                    Color c1 = new Color(245, 245, 220);
                     board[row][col].setBackground(c1);
                 } else {
+                    Color c2 = new Color(0, 100, 0);
                     board[row][col].setBackground(c2);
                 }
+                boardPanel.add(getSquare(row, col));
 
                 if ((row + col) % 2 != 0 && row < 3) {
                     board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.BLACK));
                     System.out.println("Added black piece at row " + row + ", column " + col);
                 }
                 if ((row + col) % 2 != 0 && row > 4) {
-                    board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.RED));
+                    board[row][col].setPiece(createPiece (PieceType.REGULAR, PieceColor.RED));
                     System.out.println("Added red piece at row " + row + ", column " + col);
+
                 }
 
             }
@@ -51,6 +52,7 @@ public class Board extends JFrame {
         this.add(boardPanel);
         this.pack();
         this.setVisible(true);
+
     }
 
     //Method
@@ -79,4 +81,5 @@ public class Board extends JFrame {
     public Square getSquare(int row, int col) {
         return board[row][col];
     }
+
 }

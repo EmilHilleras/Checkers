@@ -33,7 +33,7 @@ public abstract class Piece{
 
     }
 
-    public abstract boolean isValidMove(int srcRow, int srcCol, int destRow, int destCol);
+    public abstract boolean isValidMove(int dx, int dy);
 
     public PieceType getType() {
         return type;

@@ -10,8 +10,17 @@ public class RegularPiece extends Piece{
             setRegular();
     }
 
-    public boolean isValidMove(int srcRow, int srcCol, int destRow, int destCol) {
-
+    @Override
+    public boolean isValidMove(int dx, int dy) {
+        int direction = (isRed()) ? -1 : 1;
+        if (dx == 1 && dy == direction) {
+            return true;
+        } else if (dx == -1 && dy == direction) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
 }

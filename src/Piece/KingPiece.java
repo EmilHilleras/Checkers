@@ -9,9 +9,15 @@ public class KingPiece extends Piece{
         setKing();
     }
 
-    public boolean isValidMove(int srcRow, int srcCol, int destRow, int destCol) {
-
+    @Override
+    public boolean isValidMove(int dx, int dy) {
+        if (Math.abs(dx) == 1 && Math.abs(dy) == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
 
 }
