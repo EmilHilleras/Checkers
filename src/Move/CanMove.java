@@ -1,5 +1,4 @@
 package Move;
-
 import Board.Board;
 import Board.Square;
 import Piece.Piece;
@@ -7,10 +6,15 @@ import Piece.Piece;
 public class CanMove {
 
     //Instansvariabel
-    private Board board; // variabel för brädet
-    private Square sourceSquare; //Källruta
-    private Square targetSquare; //Målruta
-    private Piece piece; //variabel för pjäsen
+
+    // variabel för brädet
+    private Board board;
+    //Källruta
+    private Square sourceSquare;
+    //Målruta
+    private Square targetSquare;
+    //variabel för pjäsen
+    private Piece piece;
 
     //Konstruktor
 
@@ -29,16 +33,19 @@ public class CanMove {
     public boolean isValid() {
         //Kollar om källrutan innehåller en pjäs
         if (piece == null) {
+            System.out.println("Piece = null");
             return false;
         }
 
         //Kollar om målrutan är ogiltig eller om käll och målruta är densamma
         if (targetSquare == null || sourceSquare == targetSquare) {
+            System.out.println("targetSquare == null || sourceSquare == targetSquare");
             return false;
         }
 
         // Kollar om målrutan innehåller en pjäs
         if (targetSquare.hasPiece()) {
+            System.out.println("targetSquare has piece");
             return false;
         }
 
@@ -46,16 +53,19 @@ public class CanMove {
         int dx = targetSquare.getCol() - sourceSquare.getCol();
         int dy = targetSquare.getRow() - sourceSquare.getRow();
         if (Math.abs(dx) != Math.abs(dy)) {
+            System.out.println("Move is not diagonal");
             return false;
         }
 
         // Kollar om draget är i korrekt riktning
         if ((piece.isRed() && dy > 0) || (piece.isBlack() && dy < 0)) {
+            System.out.println("Move in wrong direction");
             return false;
         }
 
         // Kollar om draget är giltigt för pjäsen
         if (!piece.isValidMove(dx, dy)) {
+            System.out.println("Move not valid for piece");
             return false;
         }
 

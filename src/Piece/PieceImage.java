@@ -28,7 +28,7 @@ public class PieceImage implements Icon {
     //Använder HashMap för att lagra bilder för olika pjäser
     private static final HashMap<PieceImageType, Image> pieceImages = new HashMap<>();
 
-    //Laddar in bilderna i HashMapen
+    //Laddar in bilderna i HashMappen
     static {
         pieceImages.put(PieceImageType.RED_PIECE, loadImage("red_piece.png"));
         pieceImages.put(PieceImageType.BLACK_PIECE, loadImage("black_piece.png"));

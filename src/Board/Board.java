@@ -22,46 +22,65 @@ public class Board extends JFrame {
 
     //Konstruktor
     public Board() {
-        this.setTitle("Checkers"); //Titeln på spelet
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Stänger applikationen när programmet stängs av
-        int boardSize = 600; //brädstorlek
-        this.setPreferredSize(new Dimension(boardSize, boardSize));//Storlek på fönster
-        JPanel boardPanel = new JPanel(new GridLayout(8, 8)); //Skapar en JPanel som har rutnätet
+        //Titeln på spelet
+        this.setTitle("Checkers");
+        //Stänger applikationen när programmet stängs av
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //brädstorlek
+        int boardSize = 600;
+        //Storlek på fönster
+        this.setPreferredSize(new Dimension(boardSize, boardSize));
+        //Skapar en JPanel som har rutnätet
+        JPanel boardPanel = new JPanel(new GridLayout(8, 8));
 
         //Loop som skapar rutor
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
 
-                board[row][col] = new Square(row,col); //Skapar rutan
+                //Skapar ny square för varje angiven board där rad och kolumn anges
+                board[row][col] = new Square(row,col);
 
                 //Om summan av raden och kolumnen är jämn blir rutans färg c1(beige)
                 if ((row + col) % 2 == 0) {
-                    Color c1 = new Color(245, 245, 220);//c1 blir lika med beige färg
-                    board[row][col].setBackground(c1);//Bestämmer rutans färg
-                } else { //Annars blir rutans färg c2(grön)
-                    Color c2 = new Color(0, 100, 0);//c2 blir lika med grön färg
-                    board[row][col].setBackground(c2);//Bestämmer rutans färg
+                    //c1 blir lika med beige färg
+                    Color c1 = new Color(245, 245, 220);
+                    //Sätter färgen för rutan
+                    board[row][col].setBackground(c1);
+                } else {
+                    //Annars blir rutans färg c2(grön)
+                    Color c2 = new Color(0, 100, 0);
+                    //Sätter färgen för rutan
+                    board[row][col].setBackground(c2);
                 }
-                boardPanel.add(getSquare(row, col));//Lägger till rutan i JPanel, vilket gör rutan synlig
-                board[row][col].addMouseListener(new PieceMove(this));//Lägger till en mouseListner för att hålla koll på klickar i detta fall
+                //Lägger till rutan i JPanel, vilket gör rutan synlig
+                boardPanel.add(getSquare(row, col));
+                //Lägger till en mouseListner för att hålla koll på klickar i detta fall
+                board[row][col].addMouseListener(new PieceMove(this));
 
                 //If satser som placerar pjäser på spelplanen om de är jämna och uppfyller de krav som ställs utifrån färg
                 if ((row + col) % 2 != 0 && row < 3) {
-                    board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.BLACK)); //Skapar en vanlig svart pjäs
-                    System.out.println("Added black piece at row " + row + ", column " + col); //Skriver ut att pjäsen har skapats
+                    //Skapar en vanlig svart pjäs
+                    board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.BLACK));
+                    //Skriver ut att pjäsen har skapats
+                    System.out.println("Added black piece at row " + row + ", column " + col);
                 }
                 if ((row + col) % 2 != 0 && row > 4) {
-                    board[row][col].setPiece(createPiece (PieceType.REGULAR, PieceColor.RED)); //Skapar vanlig röd pjäs
-                    System.out.println("Added red piece at row " + row + ", column " + col); //Skriver ut att pjäsen har skapats
+                    //Skapar vanlig röd pjäs
+                    board[row][col].setPiece(createPiece (PieceType.REGULAR, PieceColor.RED));
+                    //Skriver ut att pjäsen har skapats
+                    System.out.println("Added red piece at row " + row + ", column " + col);
 
                 }
 
             }
         }
 
-        this.add(boardPanel); //Lägger till JPanel i fönstret
-        this.pack(); //Justerar storlek på fönstret
-        this.setVisible(true); //Sätter fönstret som synligt
+        //Lägger till JPanel i fönstret
+        this.add(boardPanel);
+        //Justerar storlek på fönstret
+        this.pack();
+        //Sätter fönstret som synligt
+        this.setVisible(true);
 
     }
 
@@ -105,7 +124,7 @@ public class Board extends JFrame {
             for (int row = 0; row < 8; row++) {
                 for (int col = 0; col < 8; col++) {
                     Square destinationSquare = getSquare(row, col);
-                    CanMove canMove = new CanMove(this, square, destinationSquare );
+                    CanMove canMove = new CanMove(this, square, destinationSquare);
                     if (canMove.isValid()) {
                         validMoves.add(destinationSquare);
                     }
