@@ -57,7 +57,7 @@ public class Board extends JFrame {
                 //Lägger till en mouseListner för att hålla koll på klickar i detta fall
                 board[row][col].addMouseListener(new PieceMove(this));
 
-                //If satser som placerar pjäser på spelplanen om de är jämna och uppfyller de krav som ställs utifrån färg
+                //If satser som placerar pjäser på spelplanen och uppfyller de krav som ställs utifrån färg
                 if ((row + col) % 2 != 0 && row < 3) {
                     //Skapar en vanlig svart pjäs
                     board[row][col].setPiece(createPiece(PieceType.REGULAR, PieceColor.BLACK));
@@ -125,7 +125,7 @@ public class Board extends JFrame {
                 for (int col = 0; col < 8; col++) {
                     Square destinationSquare = getSquare(row, col);
                     CanMove canMove = new CanMove(this, square, destinationSquare);
-                    if (canMove.isValid()) {
+                    if (canMove.isValid() || canMove.hasPieceToJumpOver(row, col)) {
                         validMoves.add(destinationSquare);
                     }
                 }
@@ -137,11 +137,11 @@ public class Board extends JFrame {
 
 
 
+
     //GetSet
 
     //Getter som returnerar ett enskilt square objekt med rad och kolumn
     public Square getSquare(int row, int col) {
         return board[row][col];
     }
-
 }

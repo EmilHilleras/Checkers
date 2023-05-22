@@ -95,9 +95,7 @@ public class Square extends JPanel {
     public void setPiece(Piece piece) {
         hasPiece = true;
         this.piece = piece;
-        this.pieceType = piece.getType();
         repaint();
-
     }
 
     //Tar bort en pjäs från en ruta

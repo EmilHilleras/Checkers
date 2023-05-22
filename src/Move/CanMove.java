@@ -3,6 +3,8 @@ import Board.Board;
 import Board.Square;
 import Piece.Piece;
 
+import java.awt.*;
+
 public class CanMove {
 
     //Instansvariabel
@@ -32,55 +34,64 @@ public class CanMove {
     //Metod som ser om draget är giltigt
     public boolean isValid() {
         //Kollar om källrutan innehåller en pjäs
-        if (piece == null) {
-            System.out.println("Piece = null");
+        if (piece == null && !sourceSquare.hasPiece()) {
             return false;
         }
 
         //Kollar om målrutan är ogiltig eller om käll och målruta är densamma
         if (targetSquare == null || sourceSquare == targetSquare) {
-            System.out.println("targetSquare == null || sourceSquare == targetSquare");
             return false;
         }
 
         // Kollar om målrutan innehåller en pjäs
         if (targetSquare.hasPiece()) {
-            System.out.println("targetSquare has piece");
             return false;
         }
 
-        // Kollar om draget är diagonalt
         int dx = targetSquare.getCol() - sourceSquare.getCol();
         int dy = targetSquare.getRow() - sourceSquare.getRow();
+        // Kollar om draget är diagonalt
         if (Math.abs(dx) != Math.abs(dy)) {
-            System.out.println("Move is not diagonal");
+
             return false;
         }
 
         // Kollar om draget är i korrekt riktning
-        if ((piece.isRed() && dy > 0) || (piece.isBlack() && dy < 0)) {
-            System.out.println("Move in wrong direction");
+        if ((piece.isRed() && piece.isRegular() && dy > 0) || (piece.isBlack() && piece.isRegular() &&dy < 0)) {
             return false;
         }
 
         // Kollar om draget är giltigt för pjäsen
         if (!piece.isValidMove(dx, dy)) {
-            System.out.println("Move not valid for piece");
             return false;
         }
 
-        // Kollar om draget är ett hopp över en annan pjäs
-        if (Math.abs(dx) == 2 && Math.abs(dy) == 2) {
-            Square middleSquare = board.getSquare((sourceSquare.getRow() + targetSquare.getRow()) / 2, (sourceSquare.getCol() + targetSquare.getCol()) / 2);
-            //Kollar om det finns en pjäs i mellanrummet och om det är annan färg än den som ska flyttas
-            if (middleSquare.hasPiece() && middleSquare.getPiece().getColor() != piece.getColor()) {
-                return true;
-            } else {
-                return false;
-            }
+        return true; //Returnerar sant om inget krav bryts
+    }
+
+    // Metod som kollar om det finns en pjäs att hoppa över
+    public boolean hasPieceToJumpOver(int dy, int dx) {
+        int middleRow = (sourceSquare.getRow() + targetSquare.getRow()) / 2;
+        int middleCol = (sourceSquare.getCol() + targetSquare.getCol()) / 2;
+        Square middleSquare = board.getSquare(middleRow, middleCol);
+
+
+        if (piece == null && !sourceSquare.hasPiece()) {
+            return false;
         }
 
-        return true; //Returnerar sant om inget krav bryts
+        //Kollar om målrutan är ogiltig eller om käll och målruta är densamma
+        if (targetSquare == null || sourceSquare == targetSquare) {
+            return false;
+        }
+
+        // Kollar om målrutan innehåller en pjäs
+        if (targetSquare.hasPiece()) {
+            return false;
+        }
+
+        // Kollar om det finns en pjäs i mellanrummet och om det är annan färg än den som ska flyttas
+        return middleSquare.hasPiece() && middleSquare.getPiece().getColor() != piece.getColor() && !targetSquare.hasPiece();
     }
 
     //Metod som utför draget
@@ -94,8 +105,10 @@ public class CanMove {
             // Kollar efter drag att hoppa över en annan pjäs och i så fall ta bort den
             int dx = targetSquare.getCol() - sourceSquare.getCol();
             int dy = targetSquare.getRow() - sourceSquare.getRow();
-            if (Math.abs(dx) == 2 && Math.abs(dy) == 2) {
-                Square middleSquare = board.getSquare((sourceSquare.getRow() + targetSquare.getRow()) / 2, (sourceSquare.getCol() + targetSquare.getCol()) / 2);
+            if (Math.abs(dx) == 2 && Math.abs(dy) == 2 && hasPieceToJumpOver(dx, dy)) {
+                int middleRow = (sourceSquare.getRow() + targetSquare.getRow()) / 2;
+                int middleCol = (sourceSquare.getCol() + targetSquare.getCol()) / 2;
+                Square middleSquare = board.getSquare(middleRow, middleCol);
                 middleSquare.removePiece();
             }
         }

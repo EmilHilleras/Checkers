@@ -41,9 +41,7 @@ public class PieceMove extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         System.out.println("Click Button " + e.getButton());
         System.out.println("Player turn: " + PlayerTurn.getPlayerTurn());
-        System.out.println("Selected piece: " + selectedPiece);
-        System.out.println("Selected Square: " + selectedSquare);
-        System.out.println("Selected Square 2: " + selectedSquare2);
+
 
         if (e.getButton() == MouseEvent.BUTTON1) {
             Square clickedSquare = (Square) e.getSource();
@@ -56,7 +54,9 @@ public class PieceMove extends MouseAdapter {
                     //Vald pjäs hämtas
                     selectedPiece = clickedSquare.getPiece();
                     selectedSquare = clickedSquare;
-                    System.out.println("selected piece: " + selectedPiece);
+
+                    System.out.println("Selected piece: " + selectedPiece);
+                    System.out.println("Selected Square: " + selectedSquare);
 
                     //Gör drag för pjäs
                     makeValidMove(selectedSquare);
@@ -64,7 +64,8 @@ public class PieceMove extends MouseAdapter {
                 }
             } else {
 
-                if (clickedSquare == selectedSquare){
+                //Om pjäsen som tryckts på klickas försvinner markeringen
+                if (selectedSquare == clickedSquare){
 
                     selectedPiece = null;
                     selectedSquare = null;
@@ -92,7 +93,7 @@ public class PieceMove extends MouseAdapter {
                         System.out.println("Selected square 2: " + selectedSquare2);
                         //skapar ett objekt move som förlitar sig på CanMove
                         CanMove move = new CanMove(board, selectedSquare, selectedSquare2);
-                        if (move.isValid()) {
+                        if (move.isValid() || move.hasPieceToJumpOver(selectedSquare2.getRow(), selectedSquare2.getCol())) {
                             //Utfärdar drag om
                             move.execute();
                             System.out.println("Move executed: " + selectedSquare + " -> " + selectedSquare2);
@@ -107,7 +108,7 @@ public class PieceMove extends MouseAdapter {
                             // Byter runda
                             PlayerTurn.switchTurn();
 
-                        } else  if (move.isValid() == false){
+                        } else  if (!move.isValid() && !move.hasPieceToJumpOver(selectedSquare2.getRow(), selectedSquare2.getCol())){
                             System.out.println("Invalid move");
                             board.clearHighlights();
                         }
@@ -119,8 +120,5 @@ public class PieceMove extends MouseAdapter {
             validSquare.highlight();
         });
     }
-
-
-
 }
 

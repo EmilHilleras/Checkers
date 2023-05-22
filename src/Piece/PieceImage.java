@@ -41,10 +41,13 @@ public class PieceImage implements Icon {
     private static Image loadImage(String filename) {
         try {
 
+
+            //Används för att öppna en inmatningsström till bildfilen
             InputStream is = PieceImage.class.getResourceAsStream(filename);
+            //Läser in bildinnehållet från den inmatningsström
             BufferedImage img = ImageIO.read(is);
 
-
+            //Skalar om bilden
             Image scaledImg = img.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
 
             return scaledImg;
